@@ -9,13 +9,22 @@
             </td>
         </tr>
         <tr>
-            <td style="width: 676px" rowspan="4">
+            <td style="width: 676px" rowspan="5">
                 <img alt="Clientes" src="images/clientes1.jpg" style="width: 623px; height: 218px" /></td>
+            <td colspan="2">
+                <strong><em><asp:Label ID="lblDatos" runat="server" Style="font-weight: 700; font-style: italic; color: #FF0000; font-size: large;"></asp:Label>
+
+                    </em></strong>
+            </td>
+        </tr>
+        <tr>
             <td style="width: 339px">
                 <asp:Label ID="Label1" runat="server" Text="Id Cliente:" CssClass="bold" Style="color: #0000FF; font-style: italic"></asp:Label>
             </td>
             <td>
-                <asp:TextBox ID="txtIdCliente" runat="server" Width="289px" ReadOnly="true"></asp:TextBox>
+                <asp:TextBox ID="txtIdCliente" runat="server" Width="289px"></asp:TextBox>
+                 &nbsp;&nbsp;
+                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" OnClick="btnBuscar_Click" />
             </td>
         </tr>
         <tr>
@@ -24,7 +33,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtNombre" runat="server" Width="289px"></asp:TextBox>
-<%--                <asp:RequiredFieldValidator ErrorMessage="Debe ingre Nombre" ControlToValidate="txtNombre" runat="server" />--%>
+                <%--                <asp:RequiredFieldValidator ErrorMessage="Debe ingre Nombre" ControlToValidate="txtNombre" runat="server" />--%>
             </td>
         </tr>
         <tr>
@@ -33,7 +42,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtDireccion" runat="server" Width="289px" TextMode="MultiLine" Height="81px"></asp:TextBox>
-<%--                <asp:RequiredFieldValidator ErrorMessage="Debe ingrear Dirección" ControlToValidate="txtDireccion" ForeColor="Red" runat="server" />--%>
+                <%--                <asp:RequiredFieldValidator ErrorMessage="Debe ingrear Dirección" ControlToValidate="txtDireccion" ForeColor="Red" runat="server" />--%>
             </td>
         </tr>
         <tr>
@@ -42,7 +51,7 @@
             </td>
             <td>
                 <asp:TextBox ID="txtTelefono" runat="server" Width="289px"></asp:TextBox>
-<%--                <asp:RequiredFieldValidator ErrorMessage="Deb ingre un Teléfono" ControlToValidate="txtTelefono" ForeColor="Red" runat="server" />--%>
+                <%--                <asp:RequiredFieldValidator ErrorMessage="Deb ingre un Teléfono" ControlToValidate="txtTelefono" ForeColor="Red" runat="server" />--%>
             </td>
         </tr>
         <tr>
@@ -50,6 +59,8 @@
             <td style="width: 339px">&nbsp;</td>
             <td>
                 <asp:Button ID="btnAgregar" runat="server" Text="Agregar" CssClass="bold" Style="color: #0000FF; font-style: italic" OnClick="btnAgregar_Click" />
+            &nbsp;
+                <asp:Button ID="btnEliminar" runat="server" OnClick="btnEliminar_Click" Text="Eliminar" />
             </td>
         </tr>
         <tr>

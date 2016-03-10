@@ -108,6 +108,60 @@ namespace AplicacionWeb.CapaDatos
             conexion.AdaptadorDatos.Update(conexion.Data, tabla);
         } 
 
+        //Método Eliminar:
+        public bool Eliminar(int  id)
+        {
+            conexion.Conectar(tabla);
+
+            DataRow fila;
+            //Busco el registro del id:
+            int x = conexion.Data.Tables[tabla].Rows.Count - 1;
+            for (int i = 0; i <= x; i++)
+            {
+                fila = conexion.Data.Tables[tabla].Rows[i];
+
+                if (int.Parse(fila["IdCliente"].ToString()) == id)
+                {
+                    fila = conexion.Data.Tables[tabla].Rows[i];
+                    fila.Delete();
+
+                    DataTable tablaBorrados = conexion.Data.Tables[tabla].GetChanges(DataRowState.Deleted);
+                    conexion.AdaptadorDatos.Update(tablaBorrados);
+                    conexion.Data.Tables[tabla].AcceptChanges();
+
+                    return true;
+                }                 
+               
+            }
+
+            return false;
+        }
+
+        //Método validar si existe registro:
+        public bool Existe(int id)
+        {
+            conexion.Conectar(tabla);
+            DataRow fila;
+
+            int x = conexion.Data.Tables[tabla].Rows.Count - 1;
+
+            for (int i = 0; i <= x; i++)
+            {
+                fila = conexion.Data.Tables[tabla].Rows[i];
+                if (int.Parse(fila["IdCliente"].ToString()) == id)
+                {
+                    IdCliente = int.Parse(fila["IdCliente"].ToString());
+                    Nombre = fila["Nombre"].ToString();
+                    Direccion = fila["Direccion"].ToString();
+                    Telefono = fila["Telefono"].ToString();
+
+                    return true;
+                }
+            } 
+
+            return false;
+        }
+
         
     }
 }

@@ -19,42 +19,105 @@ namespace AplicacionWeb
 
         protected void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtNombre.Text))
+
+            try
+            {
+                if (string.IsNullOrEmpty(txtNombre.Text))
+                {
+
+                    lblDatos.Text = "Debe ingresar un Nombre";
+                    txtNombre.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtDireccion.Text))
+                {
+
+                    lblDatos.Text = "Debe ingresar una Direccíon";
+                    txtDireccion.Focus();
+                    return;
+                }
+
+                if (string.IsNullOrEmpty(txtTelefono.Text))
+                {
+                    lblDatos.Text = "Debe ingresar un Número Teléfonico";
+                    txtTelefono.Focus();
+                    return;
+                }
+                //cliente.IdCliente =Convert.ToInt32(txtIdCliente.Text.Trim());
+                cliente.Nombre = txtNombre.Text;
+                cliente.Direccion = txtDireccion.Text;
+                cliente.Telefono = txtTelefono.Text;
+
+                cliente.Agregar();
+
+                lblError.Text = DConexion.Error;
+                lblEstado.Text = "Registro Agregado con Éxito.....";
+                lblDatos.Text = string.Empty;
+
+                txtDireccion.Text = string.Empty;
+                txtIdCliente.Text = string.Empty;
+                txtNombre.Text = string.Empty;
+                txtTelefono.Text = string.Empty;
+            }
+            catch (Exception ex)
             {
 
-                lblEstado.Text = "Debe ingresar un Nombre";
-                txtNombre.Focus();
-                return;
+                lblError.Text = "ERROR: " + ex.Message;
             }
+         
+        }
 
-            if (string.IsNullOrEmpty(txtDireccion.Text))
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {                                                                    
+
+                if (cliente.Eliminar(int.Parse(txtIdCliente.Text)))
+                {
+                    lblEstado.Text = "El registro se Eliminó con Éxito.";
+
+                    txtDireccion.Text = string.Empty;
+                    txtIdCliente.Text = string.Empty;
+                    txtNombre.Text = string.Empty;
+                    txtTelefono.Text = string.Empty;
+                }
+                else
+                {
+                    lblEstado.Text = "El registro No se Eliminó.";
+                }
+            }
+            catch (Exception ex)
             {
 
-                lblEstado.Text = "Debe ingresar una Direccion";
-                txtDireccion.Focus();
-                return;
+                lblError.Text = "ERROR: " + ex.Message;
             }
+        }
 
-            if (string.IsNullOrEmpty(txtTelefono.Text))
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
             {
-                lblEstado.Text = "Debe ingresar un Número Teléfonoco";
-                txtTelefono.Focus();
-                return;
+                if (cliente.Existe(int.Parse(txtIdCliente.Text)))
+                {
+                    txtNombre.Text = cliente.Direccion;
+                    txtDireccion.Text = cliente.Direccion;
+                    txtTelefono.Text = cliente.Telefono;
+
+                    
+
+                    lblEstado.Text = "Registro Encontrado.";
+                }
+                else
+                {
+                    lblEstado.Text =  "No existes Registro.";
+                }
             }
-            //cliente.IdCliente =Convert.ToInt32(txtIdCliente.Text.Trim());
-            cliente.Nombre = txtNombre.Text;
-            cliente.Direccion = txtDireccion.Text;
-            cliente.Telefono = txtTelefono.Text;
-            
-            cliente.Agregar();
+            catch (Exception ex)
+            {
 
-            lblError.Text = DConexion.Error;
-            lblEstado.Text = "Registro Agregado con Éxito.....";
-
-            txtDireccion.Text = string.Empty;
-            txtIdCliente.Text = string.Empty;
-            txtNombre.Text = string.Empty;
-            txtTelefono.Text = string.Empty;
+                lblError.Text = "ERROR: " + ex.Message;
+            }
         }
     }
 }
